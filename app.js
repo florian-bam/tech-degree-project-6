@@ -1,6 +1,7 @@
 // Variables
 const keyboard = document.querySelector('#qwerty');
 let phrase = document.querySelector('#phrase');
+let phraseUL = phrase.firstElementChild;
 let missed = 0;
 const mainDiv = document.querySelector('.main-container');
 const startScreen = document.querySelector('#overlay');
@@ -33,6 +34,26 @@ function getRandomPhraseAsArray(arr = phrases) {
     // }
     // // return the new character array
     return phraseLetters;
+}
+
+const phraseArray = getRandomPhraseAsArray();
+
+function addPhraseToDisplay(arr = phraseArray) {
+    // loop through an array
+    for (let i = 0; i < arr.length; i++) {
+        // for each character, create a list item
+        let li = document.createElement('li');
+        let liContent = arr[i];
+        // put the character inside inside of the list item (textContent)
+        li.innerHTML = liContent;
+        // append li to #phrase ul
+        phraseUL.appendChild(li);
+        // if character is letter
+        if (liContent !== ' ') {
+            // add class "letter"
+            li.className = 'letter';
+        }
+    }
 }
 
 // Event Listeners
