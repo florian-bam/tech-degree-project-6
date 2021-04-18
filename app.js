@@ -55,6 +55,26 @@ function addPhraseToDisplay(arr = phraseArray) {
         }
     }
 }
+addPhraseToDisplay();
+
+// get all of the elements with class "letter"
+let letterLI = document.querySelectorAll('.letter')
+
+function checkLetter(button) {
+    // loop over the letters
+    for (let i = 0; i < letterLI.length; i++) {
+        liSelect = letterLI[i];
+        liSelect = liSelect.toLowerCase();
+        // check if they match the letter in the button
+        if (liSelect === button.innerHTML) {
+            // if there's a match, add class "show"
+            liSelect.className = 'show';
+        } else {
+            // else return null
+            return null;
+        }
+    }
+}
 
 // Event Listeners
 startScreen.addEventListener('click', (e) => {
