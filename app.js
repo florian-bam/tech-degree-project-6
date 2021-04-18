@@ -5,6 +5,7 @@ let phraseUL = phrase.firstElementChild;
 let missed = 0;
 const mainDiv = document.querySelector('.main-container');
 const startScreen = document.querySelector('#overlay');
+let letterFound;
 
 // Arrays
 let phrases = [
@@ -61,19 +62,27 @@ addPhraseToDisplay();
 let letterLI = document.querySelectorAll('.letter')
 
 function checkLetter(button) {
+    let liSelect;
+    let liSelectContent;
+    let buttonContent;
+    let match = false;
     // loop over the letters
     for (let i = 0; i < letterLI.length; i++) {
         liSelect = letterLI[i];
-        liSelect = liSelect.toLowerCase();
+        liSelectContent = liSelect.innerHTML.toLowerCase();
+        buttonContent = button.innerHTML;
         // check if they match the letter in the button
-        if (liSelect === button.innerHTML) {
-            // if there's a match, add class "show"
-            liSelect.className = 'show';
-        } else {
-            // else return null
-            return null;
+        if (liSelectContent === buttonContent) {
+            match = true;
         }
     }
+    // if there's a match, add class "show"
+    if (match === true) {
+        liSelect.className = 'show';
+    } else {
+        // else return null
+            return null;
+    }            
 }
 
 // Event Listeners
@@ -83,4 +92,22 @@ startScreen.addEventListener('click', (e) => {
     }
 });
 
-// By Florian Gröne
+// Add Event Listener only to the keyboard
+keyboard.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+        let button = e.target;
+        let buttonLetter = button.innerHTML;
+        // When a player chooses a letter, add the "chosen" class to that button
+        button.className = 'chosen';
+        // set button attribute "disabled"
+        button.disabled = true;
+        // pass the button to checkLetter()
+        checkLetter(button);
+        // if the letter is correct, store it in a variable called "letterFound"
+        if (checkLetter(button) !== null) {
+            letterFound = button;
+        }
+    }
+});
+
+// By Florian Groene
