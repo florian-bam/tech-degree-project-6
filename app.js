@@ -4,7 +4,7 @@ let phrase = document.querySelector('#phrase');
 let phraseUL = phrase.firstElementChild;
 let missed = 0;
 const mainDiv = document.querySelector('.main-container');
-const startScreen = document.querySelector('.start');
+const startScreen = document.querySelector('#overlay');
 let letterFound;
 const heartsContainer = document.querySelector('ol');
 let heart = document.querySelector('.tries');
@@ -65,6 +65,7 @@ function addPhraseToDisplay(arr = phraseArray) {
     }
 }
 addPhraseToDisplay();
+letters = document.querySelectorAll('.letter');
 
 // get all of the elements with class "letter"
 let letterLI = document.querySelectorAll('.letter')
@@ -86,7 +87,6 @@ function checkLetter(button) {
             // if there's a match, add class "show"
             liSelect = liSelect.className = 'show';
             show = document.querySelectorAll('.show');
-            letters = document.querySelectorAll('.letters');
         }
     }
     if (matchBo === true) {
@@ -102,7 +102,8 @@ function checkWin() {
         console.log(show.length);
         console.log(letters.length);
         message.innerHTML = "Congratulations, you did it!";
-        winScreen.style.display = "flex";
+        document.querySelector('#overlay').className = "win";
+        document.querySelector('#overlay').style.display = "flex";
     }
 }
 function checkLose() {
@@ -115,8 +116,10 @@ function checkLose() {
         heartsContainer.removeChild(heart);
         heart = document.querySelector('.tries');
     } else {
+        let source = document.querySelector('#overlay');
         message.innerHTML = "Sorry, You lost";
-        loseScreen.style.display = "flex";
+        document.querySelector('#overlay').className = "lose";
+        document.querySelector('#overlay').style.display = "flex";
     }   
 }
 
