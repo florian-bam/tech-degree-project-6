@@ -6,7 +6,8 @@ let missed = 0;
 const mainDiv = document.querySelector('.main-container');
 const startScreen = document.querySelector('#overlay');
 let letterFound;
-let match = [];
+const heartsContainer = document.querySelector('ol');
+let heart = document.querySelector('.tries');
 
 // Arrays
 let phrases = [
@@ -78,12 +79,16 @@ function checkLetter(button) {
             matchBo = true;
             // if there's a match, add class "show"
             liSelect = liSelect.className = 'show';
-            match.push(buttonContent);
         }
     }
     if (matchBo === true) {
-        return match;
+        letterFound = buttonContent;
+        return letterFound;
     }            
+}
+
+function checkWin() {
+
 }
 
 // Event Listeners
@@ -105,8 +110,20 @@ keyboard.addEventListener('click', (e) => {
         // pass the button to checkLetter()
         checkLetter(button);
         // if the letter is correct, store it in a variable called "letterFound"
-        if (checkLetter(button) !== null) {
-            letterFound = button;
+        if (letterFound) {
+            checkWin();
+        } else {
+            missed++;
+            if (missed < 5) {
+                let lostHeart = document.createElement('li');
+                heartsContainer.appendChild(lostHeart, heart);
+                let lostHeartImg = document.createElement('img');
+                lostHeartImg.src = "images/lostHeart.png";
+                lostHeart.appendChild(lostHeartImg);
+                heartsContainer.removeChild(heart);
+            } else {
+
+            }            
         }
     }
 });

@@ -161,3 +161,9 @@ button {
 .lose a {
   color: var(--color-lose);
 }
+
+/* Lost Heart styles */
+img[src = "images/lostHeart.png"] {
+  height: 35px;
+  width: 30px;
+}
