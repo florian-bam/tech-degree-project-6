@@ -14,6 +14,8 @@ const message = document.querySelector('h2');
 let show = document.querySelectorAll('.show');
 let letters = document.querySelectorAll('.letters');
 let matchBo = false;
+let source = document.querySelector('#overlay');
+const btn = document.querySelector('.btn__reset');
 
 // Arrays
 let phrases = [
@@ -102,8 +104,10 @@ function checkWin() {
         console.log(show.length);
         console.log(letters.length);
         message.innerHTML = "Congratulations, you did it!";
-        document.querySelector('#overlay').className = "win";
-        document.querySelector('#overlay').style.display = "flex";
+        source.className = "win";
+        btn.href = 'index.html';
+        btn.innerHTML = 'Reset Game';
+        source.style.display = "flex";
     }
 }
 function checkLose() {
@@ -116,10 +120,11 @@ function checkLose() {
         heartsContainer.removeChild(heart);
         heart = document.querySelector('.tries');
     } else {
-        let source = document.querySelector('#overlay');
         message.innerHTML = "Sorry, You lost";
-        document.querySelector('#overlay').className = "lose";
-        document.querySelector('#overlay').style.display = "flex";
+        source.className = "lose";
+        btn.href = 'index.html';
+        btn.innerHTML = 'Reset Game';
+        source.style.display = "flex";
     }   
 }
 
