@@ -63,6 +63,8 @@ function addPhraseToDisplay(arr = phraseArray) {
         if (liContent !== ' ') {
             // add class "letter"
             li.className = 'letter';
+        } else {
+            li.className = 'space';
         }
     }
 }
@@ -111,7 +113,7 @@ function checkWin() {
     }
 }
 function checkLose() {
-    if (missed <= 5) {
+    if (missed < 5) {
         let lostHeart = document.createElement('li');
         heartsContainer.appendChild(lostHeart, heart);
         let lostHeartImg = document.createElement('img');
