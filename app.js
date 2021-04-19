@@ -6,6 +6,7 @@ let missed = 0;
 const mainDiv = document.querySelector('.main-container');
 const startScreen = document.querySelector('#overlay');
 let letterFound;
+let match = [];
 
 // Arrays
 let phrases = [
@@ -65,7 +66,8 @@ function checkLetter(button) {
     let liSelect;
     let liSelectContent;
     let buttonContent;
-    let match = false;
+    let matchBo = false;
+    let liCorrect;
     // loop over the letters
     for (let i = 0; i < letterLI.length; i++) {
         liSelect = letterLI[i];
@@ -73,15 +75,14 @@ function checkLetter(button) {
         buttonContent = button.innerHTML;
         // check if they match the letter in the button
         if (liSelectContent === buttonContent) {
-            match = true;
+            matchBo = true;
+            // if there's a match, add class "show"
+            liSelect = liSelect.className = 'show';
+            match.push(buttonContent);
         }
     }
-    // if there's a match, add class "show"
-    if (match === true) {
-        liSelect.className = 'show';
-    } else {
-        // else return null
-            return null;
+    if (matchBo === true) {
+        return match;
     }            
 }
 
