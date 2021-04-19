@@ -86,7 +86,6 @@ button {
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
-  transition: background 2s ease-in;
 }
 
 .space {
@@ -167,4 +166,9 @@ button {
 img[src = "images/lostHeart.png"] {
   height: 35px;
   width: 30px;
+}
+
+/* Trying to get a transition for the phrase */
+ul li {
+  transition: 2s ease-in;
 }
