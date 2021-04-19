@@ -4,10 +4,16 @@ let phrase = document.querySelector('#phrase');
 let phraseUL = phrase.firstElementChild;
 let missed = 0;
 const mainDiv = document.querySelector('.main-container');
-const startScreen = document.querySelector('#overlay');
+const startScreen = document.querySelector('.start');
 let letterFound;
 const heartsContainer = document.querySelector('ol');
 let heart = document.querySelector('.tries');
+const loseScreen = document.querySelector('.lose');
+const winScreen = document.querySelector('.win');
+const message = document.querySelector('h2');
+let show = document.querySelectorAll('.show');
+let letters = document.querySelectorAll('.letters');
+let matchBo = false;
 
 // Arrays
 let phrases = [
@@ -67,8 +73,8 @@ function checkLetter(button) {
     let liSelect;
     let liSelectContent;
     let buttonContent;
-    let matchBo = false;
     let liCorrect;
+    matchBo = false;
     // loop over the letters
     for (let i = 0; i < letterLI.length; i++) {
         liSelect = letterLI[i];
@@ -79,16 +85,39 @@ function checkLetter(button) {
             matchBo = true;
             // if there's a match, add class "show"
             liSelect = liSelect.className = 'show';
+            show = document.querySelectorAll('.show');
+            letters = document.querySelectorAll('.letters');
         }
     }
     if (matchBo === true) {
         letterFound = buttonContent;
         return letterFound;
+    } else {
+        matchBo = false;
     }            
 }
 
 function checkWin() {
-
+    if (show.length === letters.length) {
+        console.log(show.length);
+        console.log(letters.length);
+        message.innerHTML = "Congratulations, you did it!";
+        winScreen.style.display = "flex";
+    }
+}
+function checkLose() {
+    if (missed <= 5) {
+        let lostHeart = document.createElement('li');
+        heartsContainer.appendChild(lostHeart, heart);
+        let lostHeartImg = document.createElement('img');
+        lostHeartImg.src = "images/lostHeart.png";
+        lostHeart.appendChild(lostHeartImg);
+        heartsContainer.removeChild(heart);
+        heart = document.querySelector('.tries');
+    } else {
+        message.innerHTML = "Sorry, You lost";
+        loseScreen.style.display = "flex";
+    }   
 }
 
 // Event Listeners
@@ -110,20 +139,11 @@ keyboard.addEventListener('click', (e) => {
         // pass the button to checkLetter()
         checkLetter(button);
         // if the letter is correct, store it in a variable called "letterFound"
-        if (letterFound) {
+        if (matchBo === true) {
             checkWin();
         } else {
             missed++;
-            if (missed < 5) {
-                let lostHeart = document.createElement('li');
-                heartsContainer.appendChild(lostHeart, heart);
-                let lostHeartImg = document.createElement('img');
-                lostHeartImg.src = "images/lostHeart.png";
-                lostHeart.appendChild(lostHeartImg);
-                heartsContainer.removeChild(heart);
-            } else {
-
-            }            
+            checkLose();         
         }
     }
 });
